@@ -14,9 +14,9 @@ groq:
   model: "llama-3.1-70b-versatile"
 
 embedding_model:
-  provider: "google"
   model_name: "text-embedding-004"
 
-  sql_llm:
-  model_name: "llama-3.1-70b-versatile"
-
+llm:
+  openai:
+    model_name: "gpt-4o-mini"
+    temperature: 0.2
