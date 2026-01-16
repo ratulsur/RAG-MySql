@@ -1,27 +1,15 @@
-astra_db:
-  collection_name: "ecommercedata"
+app:
+  name: "rag-mysql"
+  debug: true
 
-embedding_model:
-  provider: "google"
-  model_name: "models/text-embedding-004"
+mysql:
+  host: "localhost"
+  port: 3306
+  user: "root"
+  password: "0765"
+  database: "connec2"
 
-retriever:
-  top_k: 4
-
-llm:
-  groq:
-    provider: "groq"
-    model_name: "deepseek-r1-distill-llama-70b"
-    temperature: 0
-    max_output_tokens: 2048
-
-  google:
-    provider: "google"
-    model_name: "gemini-2.0-flash"
-    temperature: 0
-    max_output_tokens: 2048
-
-  openai:
-     provider: "openai"
-     model_name: "gpt-4o"
-     temperature: 0
+groq:
+  api_key: "${GROQ_API_KEY}"
+  model: "llama-3.1-70b-versatile"
+  embedding_model: "text-embedding-3-small"
