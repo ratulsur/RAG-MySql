@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Universal MySQL RAG</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; display: flex; height: 100vh; }
+    .sidebar { width: 320px; border-right: 1px solid #ddd; padding: 16px; box-sizing: border-box; }
+    .main { flex: 1; padding: 16px; box-sizing: border-box; }
+    input, button, textarea { width: 100%; margin: 6px 0; padding: 8px; box-sizing: border-box; }
+    textarea { height: 160px; }
+    pre { background: #f6f6f6; padding: 12px; white-space: pre-wrap; border: 1px solid #eee; }
+    .row { display: flex; gap: 8px; }
+    .row input { width: 50%; }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h3>Connect MySQL</h3>
+    <input id="host" placeholder="host" value="localhost" />
+    <input id="port" placeholder="port" value="3306" />
+    <input id="user" placeholder="user" value="root" />
+    <input id="password" placeholder="password" type="password" />
+    <input id="database" placeholder="database" />
+    <button id="connectBtn">Connect</button>
+
+    <h3>Index</h3>
+    <input id="maxRows" placeholder="max rows per table" value="500" />
+    <button id="indexBtn" disabled>Index All Text</button>
+
+    <pre id="status"></pre>
+  </div>
+
+  <div class="main">
+    <h2>Ask</h2>
+    <textarea id="question" placeholder="Ask a question..."></textarea>
+    <button id="askBtn" disabled>Ask</button>
+    <pre id="answer"></pre>
+  </div>
+
+<script>
+let sessionId = null;
+
+const statusBox = document.getElementById("status");
+const answerBox = document.getElementById("answer");
+const connectBtn = document.getElementById("connectBtn");
+const indexBtn = document.getElementById("indexBtn");
+const askBtn = document.getElementById("askBtn");
+
+connectBtn.onclick = async () => {
+  statusBox.textContent = "Connecting...";
+  answerBox.textContent = "";
+
+  const payload = {
+    host: document.getElementById("host").value,
+    port: parseInt(document.getElementById("port").value || "3306", 10),
+    user: document.getElementById("user").value,
+    password: document.getElementById("password").value,
+    database: document.getElementById("database").value,
+  };
+
+  const res = await fetch("/api/connect", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(payload)
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    statusBox.textContent = "Connect failed:\n" + JSON.stringify(data, null, 2);
+    return;
+  }
+
+  sessionId = data.session_id;
+  statusBox.textContent = "Connected ✅\nSession: " + sessionId +
+    "\nTables: " + (data.tables || []).join(", ");
+  indexBtn.disabled = false;
+  askBtn.disabled = false;
+};
+
+indexBtn.onclick = async () => {
+  if (!sessionId) return;
+  statusBox.textContent = "Indexing...";
+  const maxRows = parseInt(document.getElementById("maxRows").value || "500", 10);
+
+  const res = await fetch("/api/index_all", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ session_id: sessionId, max_rows: maxRows })
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    statusBox.textContent = "Index failed:\n" + JSON.stringify(data, null, 2);
+    return;
+  }
+  statusBox.textContent = "Index complete ✅\n" + JSON.stringify(data.stats, null, 2);
+};
+
+askBtn.onclick = async () => {
+  if (!sessionId) return;
+  answerBox.textContent = "Thinking...";
+
+  const q = document.getElementById("question").value;
+
+  const res = await fetch("/api/ask", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ session_id: sessionId, question: q })
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    answerBox.textContent = "Ask failed:\n" + JSON.stringify(data, null, 2);
+    return;
+  }
+
+  answerBox.textContent = JSON.stringify(data, null, 2);
+};
+</script>
+</body>
+</html>
