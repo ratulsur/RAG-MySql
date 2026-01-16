@@ -1,0 +1,6 @@
+{"timestamp": "2026-01-16T08:54:50.958210Z", "level": "info", "event": "OPENAI_API_KEY loaded successfully"}
+{"timestamp": "2026-01-16T08:54:50.958210Z", "level": "info", "event": "GOOGLE_API_KEY loaded successfully"}
+{"timestamp": "2026-01-16T08:54:50.958210Z", "level": "info", "event": "GROQ_API_KEY loaded successfully"}
+{"timestamp": "2026-01-16T08:54:50.981741Z", "level": "info", "event": "Configuration loaded successfully"}
+{"timestamp": "2026-01-16T08:54:50.981741Z", "level": "error", "event": "Failed to load embeddings: Error in [<unknown>] at line [-1] | Message: Missing embedding_model.model_name"}
+{"timestamp": "2026-01-16T08:54:50.982744Z", "level": "error", "event": "Fatal error in ModelLoader: Error in [E:\\Training\\RAG-MySql\\RAG_Sql\\utils\\model_loader.py] at line [63] | Message: Failed to load embedding model\nTraceback:\nTraceback (most recent call last):\n  File \"E:\\Training\\RAG-MySql\\RAG_Sql\\utils\\model_loader.py\", line 63, in load_embeddings\n    raise ProductAssistantException(\"Missing embedding_model.model_name\", sys)\nRAG_Sql.exception.custom_exception.ProductAssistantException: Error in [<unknown>] at line [-1] | Message: Missing embedding_model.model_name\n"}

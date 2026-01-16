@@ -4,9 +4,9 @@ import asyncio
 from dotenv import load_dotenv
 
 # --- Internal imports (corrected paths) ---
-from product_assistant.logger.custom_logger import CustomLogger
-from product_assistant.utils.config_loader import load_config
-from product_assistant.exception.custom_exception import ProductAssistantException
+from RAG_Sql.logger.custom_logger import CustomLogger
+from RAG_Sql.utils.config_loader import load_config
+from RAG_Sql.exception.custom_exception import ProductAssistantException
 
 # --- External dependencies ---
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI

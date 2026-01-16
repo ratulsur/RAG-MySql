@@ -1,0 +1,6 @@
+{"timestamp": "2026-01-16T08:57:46.252055Z", "level": "info", "event": "OPENAI_API_KEY loaded successfully"}
+{"timestamp": "2026-01-16T08:57:46.252055Z", "level": "info", "event": "GOOGLE_API_KEY loaded successfully"}
+{"timestamp": "2026-01-16T08:57:46.252055Z", "level": "info", "event": "GROQ_API_KEY loaded successfully"}
+{"timestamp": "2026-01-16T08:57:46.252055Z", "level": "info", "event": "Configuration loaded successfully"}
+{"timestamp": "2026-01-16T08:57:46.252055Z", "level": "info", "event": "Loading Embedding Model: text-embedding-3-small"}
+{"timestamp": "2026-01-16T08:57:47.005350Z", "level": "error", "event": "Fatal error in ModelLoader: Error embedding content: 404 models/text-embedding-3-small is not found for API version v1beta, or is not supported for embedContent. Call ListModels to see the list of available models and their supported methods."}

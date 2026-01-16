@@ -1,0 +1,7 @@
+{"timestamp": "2026-01-16T08:59:40.032120Z", "level": "info", "event": "OPENAI_API_KEY loaded successfully"}
+{"timestamp": "2026-01-16T08:59:40.032120Z", "level": "info", "event": "GOOGLE_API_KEY loaded successfully"}
+{"timestamp": "2026-01-16T08:59:40.033126Z", "level": "info", "event": "GROQ_API_KEY loaded successfully"}
+{"timestamp": "2026-01-16T08:59:40.044086Z", "level": "info", "event": "Configuration loaded successfully"}
+{"timestamp": "2026-01-16T08:59:40.044086Z", "level": "info", "event": "Loading Embedding Model: text-embedding-004"}
+{"timestamp": "2026-01-16T08:59:40.698320Z", "level": "info", "event": "Loading LLM model: gpt-4o-mini"}
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
