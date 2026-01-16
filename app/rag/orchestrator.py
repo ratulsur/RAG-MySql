@@ -66,3 +66,12 @@ class Orchestrator:
             "rows": rows,
             "semantic_chunks": semantic_results,
         }
+
+
+print("ORCH: starting SQL agent")
+sql_answer, sql_used, rows = answer_question_with_sql(...)
+print("ORCH: SQL agent done")
+
+print("ORCH: starting semantic retrieve")
+semantic_results = self.retriever.retrieve(...)
+print("ORCH: semantic retrieve done")
