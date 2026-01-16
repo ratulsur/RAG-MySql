@@ -16,3 +16,7 @@ groq:
 embedding_model:
   provider: "google"
   model_name: "text-embedding-004"
+
+  sql_llm:
+  model_name: "llama-3.1-70b-versatile"
+
