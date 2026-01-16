@@ -6,7 +6,7 @@ from fastapi import HTTPException
 from app.rag.groq_client import GroqLLM
 
 # Initialize only once
-_sql_llm = GroqLLM(model_name="llama-3.1-70b-versatile")
+_sql_llm = GroqLLM(model_name="llama-3.1-8b-instant")
 
 
 def build_schema_prompt(schema: Dict[str, Any]) -> str:

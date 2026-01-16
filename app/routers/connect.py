@@ -21,6 +21,17 @@ class ConnectRequest(BaseModel):
 
 @router.post("/connect")
 def connect_mysql(req: ConnectRequest):
+    print("CONNECT HIT", req.host, req.port, req.user, req.database, flush=True)
+
+
+
+@router.post("/connect")
+def connect_db(req: ConnectRequest):
+    print("CONNECT: request received")  
+
+
+@router.post("/connect")
+def connect_mysql(req: ConnectRequest):
     """
     Creates a SQLAlchemy engine for user-supplied MySQL credentials,
     introspects schema, stores it in an in-memory session registry,
@@ -29,7 +40,12 @@ def connect_mysql(req: ConnectRequest):
     url = f"mysql+pymysql://{req.user}:{req.password}@{req.host}:{req.port}/{req.database}"
 
     try:
-        engine = create_engine(url, pool_pre_ping=True, pool_recycle=3600)
+        engine = create_engine(
+    url,
+    pool_pre_ping=True,
+    connect_args={"connect_timeout": 5},
+)
+
 
         # connection smoke test
         with engine.connect() as conn:
