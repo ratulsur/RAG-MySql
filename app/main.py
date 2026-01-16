@@ -1,3 +1,4 @@
+# app/main.py
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
@@ -10,7 +11,6 @@ app = FastAPI(title="Universal RAG over MySQL")
 app.include_router(connect_router)
 app.include_router(ask_router)
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_DIR = BASE_DIR / "app" / "static"   # ✅ FIX HERE
+STATIC_DIR = Path(__file__).resolve().parent / "static"  # ✅ app/static
 
 app.mount("/", StaticFiles(directory=str(STATIC_DIR), html=True), name="static")
